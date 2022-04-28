@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Controller = require("../controllers/brand");
+const {isLogin, isAdmin} = require('../middleware/auth')
 
-router.get("/", Controller.getAllBrand);
-router.get("/:id", Controller.getBrandById);
-router.post("/", Controller.addBrand);
-router.patch("/:id", Controller.editBrand);
-router.delete("/:id", Controller.deleteBrand);
+router.get("/", isLogin, Controller.getAllBrand);
+router.get("/:id", isLogin, Controller.getBrandById);
+router.post("/", isAdmin, Controller.addBrand);
+router.patch("/:id", isAdmin, Controller.editBrand);
+router.delete("/:id", isAdmin, Controller.deleteBrand);
 
 module.exports = router;
