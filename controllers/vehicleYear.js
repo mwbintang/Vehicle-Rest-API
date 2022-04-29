@@ -25,8 +25,8 @@ class Controller{
 
     static async addYear(req, res, next){
         try {
-            const {name} = req.body
-            const newYear = await VehicleYear.create({name})
+            const {year} = req.body
+            const newYear = await VehicleYear.create({year})
             res.status(201).json(newYear)            
         } catch (error) {
             next(error)
@@ -35,14 +35,14 @@ class Controller{
 
     static async editYear(req, res, next){
         try {
-            const {name} = req.body
+            const {year} = req.body
             const {id} = req.params
             const YearById = await VehicleYear.findByPk(id)
             if(!YearById){
                 throw({name:"Data Not Found"})
             }
-            const YearByIdUpdate = await YearById.update({name})
-            res.status(200).json(YearByIdUpdate)            
+            const YearByIdUpdate = await YearById.update({year})
+            res.status(200).json(YearByIdUpdate) 
         } catch (error) {
             next(error)
         }

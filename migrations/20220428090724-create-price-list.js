@@ -19,14 +19,18 @@ module.exports = {
         references: {
           model: 'VehicleYears',
           key: 'id'
-        }
+        },
+        onUpdate:"cascade",
+        onDelete:"cascade"
       },
       model_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'VehicleModels',
           key: 'id'
-        }
+        },
+        onUpdate:"cascade",
+        onDelete:"cascade"
       },
       createdAt: {
         allowNull: false,

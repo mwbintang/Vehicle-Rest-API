@@ -17,7 +17,9 @@ module.exports = {
         references: {
           model: 'VehicleBrands',
           key: 'id'
-        }
+        },
+        onUpdate:"cascade",
+        onDelete:"cascade"
       },
       createdAt: {
         allowNull: false,

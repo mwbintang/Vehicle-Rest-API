@@ -25,8 +25,8 @@ class Controller{
 
     static async addPrice(req, res, next){
         try {
-            const {name} = req.body
-            const newPrice = await PriceList.create({name})
+            const {code, price, year_id, model_id} = req.body
+            const newPrice = await PriceList.create({code, price, year_id, model_id})
             res.status(201).json(newPrice)            
         } catch (error) {
             next(error)
@@ -35,13 +35,13 @@ class Controller{
 
     static async editPrice(req, res, next){
         try {
-            const {name} = req.body
+            const {code, price, year_id, model_id} = req.body
             const {id} = req.params
             const PriceById = await PriceList.findByPk(id)
             if(!PriceById){
                 throw({name:"Data Not Found"})
             }
-            const PriceByIdUpdate = await PriceById.update({name})
+            const PriceByIdUpdate = await PriceById.update({code, price, year_id, model_id})
             res.status(200).json(PriceByIdUpdate)            
         } catch (error) {
             next(error)

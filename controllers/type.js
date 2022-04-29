@@ -25,8 +25,8 @@ class Controller{
 
     static async addType(req, res, next){
         try {
-            const {name} = req.body
-            const newType = await VehicleType.create({name})
+            const {name, brand_id} = req.body
+            const newType = await VehicleType.create({name, brand_id})
             res.status(201).json(newType)            
         } catch (error) {
             next(error)
@@ -35,13 +35,13 @@ class Controller{
 
     static async editType(req, res, next){
         try {
-            const {name} = req.body
+            const {name, brand_id} = req.body
             const {id} = req.params
             const TypeById = await VehicleType.findByPk(id)
             if(!TypeById){
                 throw({name:"Data Not Found"})
             }
-            const typeByIdUpdate = await TypeById.update({name})
+            const typeByIdUpdate = await TypeById.update({name, brand_id})
             res.status(200).json(typeByIdUpdate)            
         } catch (error) {
             next(error)

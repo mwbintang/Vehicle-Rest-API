@@ -25,8 +25,8 @@ class Controller{
 
     static async addModel(req, res, next){
         try {
-            const {name} = req.body
-            const newModel = await VehicleModel.create({name})
+            const {name, type_id} = req.body
+            const newModel = await VehicleModel.create({name, type_id})
             res.status(201).json(newModel)            
         } catch (error) {
             next(error)
@@ -35,13 +35,13 @@ class Controller{
 
     static async editModel(req, res, next){
         try {
-            const {name} = req.body
+            const {name, type_id} = req.body
             const {id} = req.params
             const modelById = await VehicleModel.findByPk(id)
             if(!modelById){
                 throw({name:"Data Not Found"})
             }
-            const modelByIdUpdate = await modelById.update({name})
+            const modelByIdUpdate = await modelById.update({name, type_id})
             res.status(200).json(modelByIdUpdate)            
         } catch (error) {
             next(error)

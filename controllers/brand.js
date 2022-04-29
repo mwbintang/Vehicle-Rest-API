@@ -1,11 +1,12 @@
-const {VehicleBrand} = require('../models')
+const {VehicleBrand, VehicleType} = require('../models')
 
 class Controller{
     static async getAllBrand(req, res, next){
         try {
-            const allBrand = await VehicleBrand.findAll()
+            const allBrand = await VehicleBrand.findAll({include:{model:VehicleType}})
             res.status(200).json(allBrand)            
         } catch (error) {
+            console.log(error)
             next(error)
         }
     }
